@@ -10,6 +10,7 @@ import java.util.List;
 import static com.kate.yarnshop.constants.Constants.USER;
 
 @RestController
+@RequestMapping("/users")
 public class UserController {
     private final UserRepository userRepository;
 
@@ -17,23 +18,23 @@ public class UserController {
         this.userRepository = userRepository;
     }
 
-    @GetMapping("/users")
+    @GetMapping
     public List<User> getAllUsers() {
         return userRepository.findAll();
     }
 
-    @GetMapping("/users/{id}")
+    @GetMapping("/{id}")
     public User findUserById(@PathVariable Long id) throws EntityNotFoundException {
         return userRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException(id, USER));
     }
 
-    @PostMapping("/users")
+    @PostMapping
     public User create(@RequestBody User user) {
         return userRepository.saveAndFlush(user);
     }
 
-    @PutMapping("/users/{id}")
+    @PutMapping("/{id}")
     public User updateUser(@RequestBody User newUser, @PathVariable Long id) throws EntityNotFoundException {
         return userRepository.findById(id).map(user -> {
             user.setName(newUser.getName());
@@ -49,7 +50,7 @@ public class UserController {
         }).orElseThrow(() -> new EntityNotFoundException(id, USER));
     }
 
-    @DeleteMapping("/users/{id}")
+    @DeleteMapping("/{id}")
     public void deleteUser(@PathVariable Long id) {
         userRepository.deleteById(id);
     }

@@ -14,8 +14,8 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = ID, nullable = false, unique = true)
     private Long id;
-    @Column(name = PRODUCT_TYPE_ROW, nullable = false)
     @ManyToOne(targetEntity = ProductType.class)
+    @JoinColumn(name = PRODUCT_TYPE_ROW)
     private ProductType productType;
     @Column(name = DESCRIPTION_ROW, nullable = false)
     private String description;
@@ -29,4 +29,6 @@ public class Product {
     private String color;
     @Column(name = PICTURE_ROW, nullable = false)
     private String picture;
+    @Column(name = YARN_TYPE_ROW, nullable = false)
+    private String yarnType;
 }

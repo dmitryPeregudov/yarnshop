@@ -32,8 +32,10 @@ public class Constants {
     public static final String THICKNESS_ROW = "THICKNESS";
     public static final String COLOR_ROW = "COLOR";
     public static final String PICTURE_ROW = "PICTURE";
+    public static final String YARN_TYPE_ROW = "YARN_TYPE";
 
     public static final String CUSTOMER_ROLE = "customer";
     public static final String USER = "user";
     public static final String PRODUCT_TYPE = "product type";
+    public static final String PRODUCT = "product";
 }
