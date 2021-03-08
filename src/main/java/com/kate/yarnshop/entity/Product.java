@@ -14,8 +14,8 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = ID, nullable = false, unique = true)
     private Long id;
-    @ManyToOne(targetEntity = ProductType.class)
-    @JoinColumn(name = PRODUCT_TYPE_ROW)
+    @ManyToOne(targetEntity = ProductType.class, fetch = FetchType.EAGER)
+    @JoinColumn(name = PRODUCT_TYPE_ROW, nullable = false)
     private ProductType productType;
     @Column(name = DESCRIPTION_ROW, nullable = false)
     private String description;

@@ -10,6 +10,7 @@ public class Constants {
     public static final String PRODUCT_TYPES_TABLE = "PRODUCT_TYPES";
     public static final String ORDERS_TABLE = "ORDERS";
     public static final String PRODUCTS_TABLE = "PRODUCTS";
+    public static final String ORDERED_PRODUCT_AND_QUANTITY_TABLE = "ORDERED_PRODUCT_AND_QUANTITY";
 
     public static final String ID = "ID";
     public static final String LOGIN_ROW = "LOGIN";
@@ -33,9 +34,19 @@ public class Constants {
     public static final String COLOR_ROW = "COLOR";
     public static final String PICTURE_ROW = "PICTURE";
     public static final String YARN_TYPE_ROW = "YARN_TYPE";
+    public static final String USER_ROW = "USER_ID";
+    public static final String STATUS_ROW = "STATUS";
+    public static final String LINE_ID_ROW = "LINE_ID";
+    public static final String PRODUCT_ID_ROW = "PRODUCT_ID";
+    public static final String QUANTITY_ROW = "QUANTITY";
+    public static final String ORDER_ID_ROW = "ORDER_ID";
 
     public static final String CUSTOMER_ROLE = "customer";
     public static final String USER = "user";
     public static final String PRODUCT_TYPE = "product type";
     public static final String PRODUCT = "product";
+
+    public static final String STATUS_PROCESSING = "PROCESSING";
+    public static final String STATUS_SENT = "SENT";
+    public static final String STATUS_DONE = "DONE";
 }

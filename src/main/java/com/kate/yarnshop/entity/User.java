@@ -1,5 +1,6 @@
 package com.kate.yarnshop.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.kate.yarnshop.encription.AttributeEncryptor;
 import lombok.Data;
 
@@ -8,7 +9,11 @@ import javax.persistence.*;
 import static com.kate.yarnshop.constants.Constants.*;
 
 @Entity
-@Table(name = USER_TABLE)
+@Table(name = USER_TABLE,
+        uniqueConstraints = {
+                @UniqueConstraint(columnNames = LOGIN_ROW),
+                @UniqueConstraint(columnNames = EMAIL_ROW)
+        })
 @Data
 public class User {
     @Id
@@ -17,6 +22,7 @@ public class User {
     private Long id;
     @Column(name = LOGIN_ROW, unique = true, nullable = false)
     private String login;
+    @JsonIgnore
     @Column(name = PASSWORD_ROW, nullable = false)
     @Convert(converter = AttributeEncryptor.class)
     private String password;

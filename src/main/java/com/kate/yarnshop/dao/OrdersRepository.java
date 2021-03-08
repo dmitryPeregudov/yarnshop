@@ -1,6 +1,6 @@
 package com.kate.yarnshop.dao;
 
-import com.kate.yarnshop.entity.Product;
+import com.kate.yarnshop.entity.Order;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -10,9 +10,9 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Repository
-public interface ProductsRepository extends JpaRepository<Product, Long> {
+public interface OrdersRepository extends JpaRepository<Order, Long> {
 
     @Transactional(readOnly = true)
-    @Query(value = "select product from Product product where product .productType .id = :type")
-    public List<Product> findByType(@Param("type") Long type);
+    @Query(value = "select order from Order order where order .user .id = :userId")
+    public List<Order> getOrdersByUserId(@Param("userId") Long userId);
 }

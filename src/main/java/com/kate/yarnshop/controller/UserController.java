@@ -2,6 +2,7 @@ package com.kate.yarnshop.controller;
 
 import com.kate.yarnshop.dao.UserRepository;
 import com.kate.yarnshop.entity.User;
+import com.kate.yarnshop.entity.UserPassword;
 import com.kate.yarnshop.exceptions.EntityNotFoundException;
 import org.springframework.web.bind.annotation.*;
 
@@ -40,13 +41,19 @@ public class UserController {
             user.setName(newUser.getName());
             user.setMiddleName(newUser.getMiddleName());
             user.setSurName(newUser.getSurName());
-            user.setLogin(newUser.getLogin());
-            user.setPassword(newUser.getPassword());
             user.setAddress(newUser.getAddress());
             user.setPost(newUser.getPost());
             user.setEmail(newUser.getEmail());
             user.setDateOfBirth(newUser.getDateOfBirth());
             return userRepository.save(user);
+        }).orElseThrow(() -> new EntityNotFoundException(id, USER));
+    }
+
+    @PutMapping({"passwordUpdate/{id}"})
+    public User updateUserPassword(@PathVariable Long id, @RequestBody UserPassword password) throws EntityNotFoundException {
+        return userRepository.findById(id).map(existingUser -> {
+            existingUser.setPassword(password.getPassword());
+            return userRepository.saveAndFlush(existingUser);
         }).orElseThrow(() -> new EntityNotFoundException(id, USER));
     }
 
