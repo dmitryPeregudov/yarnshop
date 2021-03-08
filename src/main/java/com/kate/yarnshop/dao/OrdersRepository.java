@@ -14,5 +14,5 @@ public interface OrdersRepository extends JpaRepository<Order, Long> {
 
     @Transactional(readOnly = true)
     @Query(value = "select order from Order order where order .user .id = :userId")
-    public List<Order> getOrdersByUserId(@Param("userId") Long userId);
+    List<Order> getOrdersByUserId(@Param("userId") Long userId);
 }

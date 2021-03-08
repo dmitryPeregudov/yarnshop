@@ -14,5 +14,5 @@ public interface ProductsRepository extends JpaRepository<Product, Long> {
 
     @Transactional(readOnly = true)
     @Query(value = "select product from Product product where product .productType .id = :type")
-    public List<Product> findByType(@Param("type") Long type);
+    List<Product> findByType(@Param("type") Long type);
 }
