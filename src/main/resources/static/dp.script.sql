@@ -13,14 +13,13 @@ VALUES (1, 'admin'),
 CREATE TABLE IF NOT EXISTS USERS
 (
     ID            INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
-    LOGIN
-                  VARCHAR(255)                   NOT NULL,
+    LOGIN         VARCHAR(255) unique            NOT NULL,
     PASSWORD      VARCHAR(255)                   NOT NULL,
     NAME          VARCHAR(255)                   NOT NULL,
     MIDDLE_NAME   VARCHAR(255)                   NOT NULL,
     SURNAME       VARCHAR(255)                   NOT NULL,
     ADDRESS       VARCHAR(500)                   NOT NULL,
-    EMAIL         VARCHAR(255)                   NOT NULL,
+    EMAIL         VARCHAR(255) unique            NOT NULL,
     POST          VARCHAR(255)                   NOT NULL,
     DATE_OF_BIRTH DATE,
     ROLE          INT                            NOT NULL,

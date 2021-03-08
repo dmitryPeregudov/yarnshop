@@ -1,6 +1,6 @@
 package com.kate.yarnshop.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.kate.yarnshop.encription.AttributeEncryptor;
 import lombok.Data;
 
@@ -22,7 +22,7 @@ public class User {
     private Long id;
     @Column(name = LOGIN_ROW, unique = true, nullable = false)
     private String login;
-    @JsonIgnore
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @Column(name = PASSWORD_ROW, nullable = false)
     @Convert(converter = AttributeEncryptor.class)
     private String password;
