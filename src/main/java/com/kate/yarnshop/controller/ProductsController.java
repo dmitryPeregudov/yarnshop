@@ -7,10 +7,10 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-import static com.kate.yarnshop.constants.Constants.PRODUCT;
+import static com.kate.yarnshop.constants.Constants.*;
 
 @RestController
-@RequestMapping("/products")
+@RequestMapping(PRODUCTS_PATH)
 public class ProductsController {
     private final ProductsRepository productsRepository;
 
@@ -26,38 +26,11 @@ public class ProductsController {
     @GetMapping("/{id}")
     public Product getProductById(@PathVariable Long id) throws EntityNotFoundException {
         return productsRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException(id, PRODUCT));
+                .orElseThrow(() -> new EntityNotFoundException(PRODUCT));
     }
 
     @GetMapping("/type/{categoryId}")
     public List<Product> getProductsByCategory(@PathVariable Long categoryId) {
         return productsRepository.findByType(categoryId);
-    }
-
-    @PostMapping
-    public Product saveProduct(@RequestBody Product product) {
-        return productsRepository.saveAndFlush(product);
-    }
-
-    @PutMapping("/{id}")
-    public Product updateProduct(@PathVariable final Long id, @RequestBody final Product product) throws EntityNotFoundException {
-        return productsRepository.findById(id)
-                .map(existingProduct -> {
-                    existingProduct.setProductType(product.getProductType());
-                    existingProduct.setDescription(product.getDescription());
-                    existingProduct.setPrice(product.getPrice());
-                    existingProduct.setColor(product.getColor());
-                    existingProduct.setPicture(product.getPicture());
-                    existingProduct.setWeight(product.getWeight());
-                    existingProduct.setThickness(product.getThickness());
-                    existingProduct.setYarnType(product.getYarnType());
-                    return productsRepository.saveAndFlush(existingProduct);
-                })
-                .orElseThrow(() -> new EntityNotFoundException(id, PRODUCT));
-    }
-
-    @DeleteMapping("/{id}")
-    public void deleteProduct(@PathVariable Long id) {
-        productsRepository.deleteById(id);
     }
 }

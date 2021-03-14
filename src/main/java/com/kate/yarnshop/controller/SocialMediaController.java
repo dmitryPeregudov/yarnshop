@@ -8,8 +8,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+import static com.kate.yarnshop.constants.Constants.SOCIAL_MEDIA_PATH;
+
 @RestController
-@RequestMapping("/socialMedia")
+@RequestMapping(SOCIAL_MEDIA_PATH)
 public class SocialMediaController {
     private final SocialMediaRepository socialMediaRepository;
 

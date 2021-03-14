@@ -8,8 +8,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+import static com.kate.yarnshop.constants.Constants.CONTACT_PATH;
+
 @RestController
-@RequestMapping("/contacts")
+@RequestMapping(CONTACT_PATH)
 public class ContactsController {
     private final ContactsRepository contactsRepository;
 

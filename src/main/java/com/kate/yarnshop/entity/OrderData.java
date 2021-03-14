@@ -24,6 +24,6 @@ public class OrderData implements Serializable {
     @JoinColumn(name = PRODUCT_ID_ROW)
     @ManyToOne(targetEntity = Product.class, fetch = FetchType.EAGER)
     private Product product;
-    @Column(name = QUANTITY_ROW,nullable = false)
+    @Column(name = QUANTITY_ROW, nullable = false)
     private Integer quantity;
 }

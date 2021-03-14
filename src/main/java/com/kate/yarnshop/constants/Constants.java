@@ -49,4 +49,20 @@ public class Constants {
     public static final String STATUS_PROCESSING = "PROCESSING";
     public static final String STATUS_SENT = "SENT";
     public static final String STATUS_DONE = "DONE";
+    public static final String STATUS_CANCELLED = "CANCELLED";
+
+    public static final String ROLE_ADMIN = "ROLE_ADMIN";
+    public static final String ROLE_CUSTOMER = "ROLE_CUSTOMER";
+    public static final String ROLE_SELLER = "ROLE_SELLER";
+
+    public static final String CONTACT_PATH = "/contacts";
+    public static final String ORDERS_PATH = "/orders";
+    public static final String PRODUCTS_PATH = "/products";
+    public static final String SELLER_PRODUCTS_PATH = "/seller/products";
+    public static final String PRODUCT_TYPES_PATH = "/productTypes";
+    public static final String SELLER_PRODUCT_TYPES_PATH = "/seller/productTypes";
+    public static final String REGISTER_PATH = "/register";
+    public static final String SOCIAL_MEDIA_PATH = "/socialMedia";
+    public static final String SELLER_PATH = "/seller";
+    public static final String EXTENDED_PATH = "/**";
 }

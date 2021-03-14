@@ -16,12 +16,12 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = ID, nullable = false, unique = true)
     private Long id;
-    @ManyToOne(targetEntity = User.class,fetch = FetchType.EAGER)
+    @ManyToOne(targetEntity = User.class, fetch = FetchType.EAGER)
     @JoinColumn(name = USER_ROW)
     private User user;
-    @OneToMany(targetEntity = OrderData.class,mappedBy = "order",fetch = FetchType.EAGER)
+    @OneToMany(targetEntity = OrderData.class, mappedBy = "order", fetch = FetchType.EAGER)
     private List<OrderData> orderData = new ArrayList<>();
-    @ManyToOne(targetEntity = OrderStatus.class,fetch = FetchType.EAGER)
+    @ManyToOne(targetEntity = OrderStatus.class, fetch = FetchType.EAGER)
     @JoinColumn(name = STATUS_ROW)
     private OrderStatus orderStatus;
 }

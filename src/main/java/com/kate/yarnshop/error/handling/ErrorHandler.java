@@ -4,6 +4,7 @@ import com.kate.yarnshop.exceptions.EntityAlreadyExistsException;
 import com.kate.yarnshop.exceptions.EntityNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -15,7 +16,7 @@ import java.sql.SQLException;
 @ControllerAdvice
 public class ErrorHandler extends ResponseEntityExceptionHandler {
 
-    @ExceptionHandler(EntityNotFoundException.class)
+    @ExceptionHandler({EntityNotFoundException.class})
     public ResponseEntity<Object> handleEntityNotFound(Exception ex) {
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
     }
@@ -26,8 +27,13 @@ public class ErrorHandler extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.CONFLICT);
     }
 
-    @ExceptionHandler(SQLException.class)
+    @ExceptionHandler({SQLException.class, UnsupportedOperationException.class})
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public void sqlHandler() {
+    }
+
+    @ExceptionHandler(UsernameNotFoundException.class)
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    public void authErrorHandler() {
     }
 }

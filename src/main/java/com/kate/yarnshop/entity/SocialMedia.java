@@ -13,7 +13,7 @@ import static com.kate.yarnshop.constants.Constants.*;
 public class SocialMedia {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = NAME_ROW,unique = true,nullable = false)
+    @Column(name = NAME_ROW, unique = true, nullable = false)
     private String name;
     @Column(name = LINK_ROW, nullable = false)
     private URL link;

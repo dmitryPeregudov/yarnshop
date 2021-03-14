@@ -2,6 +2,7 @@ package com.kate.yarnshop.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
 
@@ -11,7 +12,7 @@ import static com.kate.yarnshop.constants.Constants.*;
 @Table(name = ROLE_TABLE)
 @Data
 @AllArgsConstructor
-public class Role {
+public class Role implements GrantedAuthority {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,5 +26,10 @@ public class Role {
     }
 
     public Role() {
+    }
+
+    @Override
+    public String getAuthority() {
+        return "ROLE_" + getName().toUpperCase();
     }
 }
