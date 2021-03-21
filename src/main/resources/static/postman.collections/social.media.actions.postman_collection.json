@@ -1,0 +1,28 @@
+{
+	"info": {
+		"_postman_id": "7d99c070-002f-4f56-a59a-42fc2600f74e",
+		"name": "social.media.actions",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "get all social media",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/socialMedia",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"socialMedia"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

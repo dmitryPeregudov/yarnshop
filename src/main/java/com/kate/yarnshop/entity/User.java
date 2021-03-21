@@ -34,13 +34,13 @@ public class User {
     private String surName;
     @Column(name = ADDRESS_ROW)
     private String address;
-    @Column(name = EMAIL_ROW)
+    @Column(name = EMAIL_ROW, unique = true, nullable = false)
     private String email;
     @Column(name = POST_ROW)
     private String post;
     @Column(name = DATE_OF_BIRTH_ROW)
     private String dateOfBirth;
-    @ManyToOne(targetEntity = Role.class)
+    @ManyToOne(targetEntity = Role.class, fetch = FetchType.EAGER)
     @JoinColumn(name = ROLE_ROW)
     private Role role;
 }

@@ -15,7 +15,6 @@ import java.util.Optional;
 
 import static com.kate.yarnshop.constants.Constants.*;
 
-//todo add endpoint to register admins and seller
 @RestController
 @RequestMapping("/users")
 public class UserController {

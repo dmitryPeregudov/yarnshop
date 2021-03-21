@@ -26,6 +26,11 @@ CREATE TABLE IF NOT EXISTS USERS
     FOREIGN KEY (ROLE) REFERENCES ROLES (ID)
 );
 
+insert into USERS
+values (1, 'kateAdmin', 'q7frBLnBl6NylQI8o83DkA==', 'Kate', '', '', '', 'kate@mail.com', '', now(), 1),
+       (2, 'kateSeller', 'cOVIficxkai8oisuPfPRkA==', 'Kate', '', '', '', 'kate1@mail.com', '', now(), 3),
+       (3, 'kateCustomer', 'wJ86ca6JGjp/KVvrpuszGA==', 'Kate', '', '', '', 'kate12@mail.com', '', now(), 2);
+
 create table if not exists PRODUCT_TYPES
 (
     ID   INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
@@ -81,8 +86,9 @@ VALUES (1, 'PROCESSING'),
 
 CREATE TABLE IF NOT EXISTS ORDERED_PRODUCT_AND_QUANTITY
 (
-    LINE_ID         BIGINT PRIMARY KEY AUTO_INCREMENT NOT NULL,
-    ORDER_ID BIGINT NOT NULL, FOREIGN KEY(ORDER_ID) REFERENCES ORDERS(ID),
+    LINE_ID    BIGINT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    ORDER_ID   BIGINT                            NOT NULL,
+    FOREIGN KEY (ORDER_ID) REFERENCES ORDERS (ID),
     PRODUCT_ID INT                               NOT NULL,
     FOREIGN KEY (PRODUCT_ID) REFERENCES PRODUCTS (ID),
     QUANTITY   INT                               NOT NULL
@@ -90,10 +96,10 @@ CREATE TABLE IF NOT EXISTS ORDERED_PRODUCT_AND_QUANTITY
 
 CREATE TABLE IF NOT EXISTS ORDERS
 (
-    ID         BIGINT PRIMARY KEY AUTO_INCREMENT NOT NULL,
-    USER_ID    INT                               not null,
+    ID      BIGINT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    USER_ID INT                               not null,
     FOREIGN KEY (USER_ID) references USERS (ID),
-    STATUS     INT,
+    STATUS  INT,
     FOREIGN KEY (STATUS) REFERENCES ORDER_STATUSES (ID)
 );
 
