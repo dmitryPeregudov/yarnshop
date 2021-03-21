@@ -62,7 +62,10 @@ public class Constants {
     public static final String PRODUCT_TYPES_PATH = "/productTypes";
     public static final String SELLER_PRODUCT_TYPES_PATH = "/seller/productTypes";
     public static final String REGISTER_PATH = "/register";
+    public static final String LOGIN_PATH = "/login";
     public static final String SOCIAL_MEDIA_PATH = "/socialMedia";
     public static final String SELLER_PATH = "/seller";
     public static final String EXTENDED_PATH = "/**";
+
+    public static final long JWT_TOKEN_VALIDITY = 60 * 60;
 }

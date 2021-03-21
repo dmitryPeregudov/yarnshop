@@ -1,7 +1,6 @@
 package com.kate.yarnshop.security;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -9,8 +8,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import static com.kate.yarnshop.constants.Constants.*;
 
@@ -22,12 +20,11 @@ import static com.kate.yarnshop.constants.Constants.*;
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Value("${shop.basic.auth.enabled}")
     private boolean basicAuthEnabled;
+    private final JwtFilter jwtFilter;
 
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
+    public WebSecurityConfig(JwtFilter jwtFilter) {
+        this.jwtFilter = jwtFilter;
     }
-
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -39,7 +36,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         REGISTER_PATH,
                         CONTACT_PATH,
                         PRODUCTS_PATH + EXTENDED_PATH,
-                        PRODUCT_TYPES_PATH)
+                        PRODUCT_TYPES_PATH,
+                        LOGIN_PATH)
                 .permitAll()
                 .and()
                 .authorizeRequests()
@@ -51,7 +49,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authenticated()
                 .and()
                 .sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and()
+                .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
         if (basicAuthEnabled) {
             http.httpBasic();
         }
