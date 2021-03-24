@@ -154,51 +154,7 @@
 			"response": []
 		},
 		{
-			"name": "update order",
-			"request": {
-				"auth": {
-					"type": "basic",
-					"basic": [
-						{
-							"key": "username",
-							"value": "kate12@mail.com",
-							"type": "string"
-						},
-						{
-							"key": "password",
-							"value": "kateCustomer",
-							"type": "string"
-						}
-					]
-				},
-				"method": "PUT",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"user\": {\r\n        \"id\": 3\r\n    },\r\n    \"orderData\": [\r\n        {\r\n            \r\n            \"product\": {\r\n                \"id\": 1\r\n            },\r\n            \"quantity\": 6\r\n        }\r\n    ]\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:8080/orders/34",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"orders",
-						"34"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "delete order",
+			"name": "del order",
 			"request": {
 				"auth": {
 					"type": "basic",
@@ -233,7 +189,7 @@
 			"response": []
 		},
 		{
-			"name": "New Request",
+			"name": "change status",
 			"request": {
 				"auth": {
 					"type": "basic",

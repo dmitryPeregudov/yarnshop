@@ -19,7 +19,7 @@ public class Order {
     @ManyToOne(targetEntity = User.class, fetch = FetchType.EAGER)
     @JoinColumn(name = USER_ROW)
     private User user;
-    @OneToMany(targetEntity = OrderData.class, mappedBy = "order", fetch = FetchType.EAGER)
+    @OneToMany(targetEntity = OrderData.class, cascade = CascadeType.ALL,mappedBy = "order", fetch = FetchType.EAGER)
     private List<OrderData> orderData = new ArrayList<>();
     @ManyToOne(targetEntity = OrderStatus.class, fetch = FetchType.EAGER)
     @JoinColumn(name = STATUS_ROW)

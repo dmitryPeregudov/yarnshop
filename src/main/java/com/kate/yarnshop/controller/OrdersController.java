@@ -4,6 +4,7 @@ import com.kate.yarnshop.dao.OrdersRepository;
 import com.kate.yarnshop.entity.*;
 import com.kate.yarnshop.exceptions.EntityNotFoundException;
 import com.kate.yarnshop.validation.SameCustomerValidation;
+import org.modelmapper.ModelMapper;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
@@ -56,25 +57,15 @@ public class OrdersController {
 
     @PostMapping
     @Secured(ROLE_CUSTOMER)
-    public Order createOrder(@RequestBody Order order) {
-        order.setOrderStatus(OrderStatus.PROCESSING);
-        return ordersRepository.save(order);
-    }
+    public Order createOrder(@RequestBody OrderDto orderDto) {
 
-    @PutMapping("/{id}")
-    @Secured(ROLE_CUSTOMER)
-    public Order updateOrder(@RequestBody Order order, @PathVariable Long id) throws EntityNotFoundException {
-        return ordersRepository.findById(id).map(existingOrder -> {
-            if (existingOrder.getOrderStatus().equals(OrderStatus.DONE) ||
-                    existingOrder.getOrderStatus().equals(OrderStatus.CANCELLED)) {
-                throw new UnsupportedOperationException();
-            }
-            if (sameCustomerValidation.isWrongUser(existingOrder.getUser())) {
-                throw new UnsupportedOperationException();
-            }
-            existingOrder.setOrderData(order.getOrderData());
-            return ordersRepository.save(existingOrder);
-        }).orElseThrow(() -> new EntityNotFoundException("order"));
+        ModelMapper modelMapper = new ModelMapper();
+        Order order = modelMapper.map(orderDto, Order.class);
+        order.setOrderStatus(OrderStatus.PROCESSING);
+        for (OrderData data : order.getOrderData()) {
+            data.setOrder(order);
+        }
+        return ordersRepository.save(order);
     }
 
     @PutMapping("/{id}/{statusId}")
