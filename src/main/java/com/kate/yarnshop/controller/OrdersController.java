@@ -61,6 +61,7 @@ public class OrdersController {
 
         ModelMapper modelMapper = new ModelMapper();
         Order order = modelMapper.map(orderDto, Order.class);
+        order.setId(null);
         order.setOrderStatus(OrderStatus.PROCESSING);
         for (OrderData data : order.getOrderData()) {
             data.setOrder(order);
