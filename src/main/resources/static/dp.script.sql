@@ -151,3 +151,11 @@ VALUES (1, 1, 'Ангора арт. Angora 80 . Итальянская боби�
        (26, 5, 'Шёлк 100 % арт. Dragon. Итальянская бобинная пряжа', 150.00, 100, 80, 'белый', 'img/Yarn4_big.jpg',
         'Шёлк'),
        (27, 5, 'Шёлк арт. Shappe. Итальянская бобинная пряжа', 150.00, 100, 80, 'красный', 'img/Yarn5_big.jpg', 'Шёлк');
+
+insert into SHOP_CONTACTS
+values ('Александр', '+380504732940', ''),
+       ('Светлана', '+380505605324', '(Viber, Telegramm, WatsApp)');
+
+insert into SOCIAL_MEDIA
+values ('Instagram', 'https://www.instagram.com/yarinka_yarn/'),
+       ('FB', 'https://www.facebook.com/yarinka.yarn/');
