@@ -25,10 +25,12 @@ public class BasicUserController {
 
     @PostMapping
     @RequestMapping("/register")
-    public String register(@RequestBody User user) {
+    public AuthResponse register(@RequestBody User user) {
         user.setRole(Role.getDefaultRole());
-        userRepository.saveAndFlush(user);
-        return "OK";
+        User savedUser = userRepository.saveAndFlush(user);
+        String token = jwtProvider.generateToken(savedUser.getLogin());
+        return new AuthResponse(token, savedUser.getRole().getName(),
+                savedUser.getName(), savedUser.getSurName(), savedUser.getLogin());
     }
 
     @PostMapping("/login")
@@ -38,6 +40,7 @@ public class BasicUserController {
             throw new EntityNotFoundException("user");
         }
         String token = jwtProvider.generateToken(userEntity.getLogin());
-        return new AuthResponse(token);
+        return new AuthResponse(token, userEntity.getRole().getName(),
+                userEntity.getName(), userEntity.getSurName(), userEntity.getLogin());
     }
 }
