@@ -29,7 +29,7 @@ public class BasicUserController {
         user.setRole(Role.getDefaultRole());
         User savedUser = userRepository.saveAndFlush(user);
         String token = jwtProvider.generateToken(savedUser.getLogin());
-        return new AuthResponse(token, savedUser.getRole().getName(),
+        return new AuthResponse(user.getId(), token, savedUser.getRole().getName(),
                 savedUser.getName(), savedUser.getSurName(), savedUser.getLogin());
     }
 
@@ -40,7 +40,7 @@ public class BasicUserController {
             throw new EntityNotFoundException("user");
         }
         String token = jwtProvider.generateToken(userEntity.getLogin());
-        return new AuthResponse(token, userEntity.getRole().getName(),
+        return new AuthResponse(userEntity.getId(), token, userEntity.getRole().getName(),
                 userEntity.getName(), userEntity.getSurName(), userEntity.getLogin());
     }
 }

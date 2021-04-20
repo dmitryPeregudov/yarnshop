@@ -1,5 +1,6 @@
 package com.kate.yarnshop.error.handling;
 
+import com.kate.yarnshop.entity.ErrorResponse;
 import com.kate.yarnshop.exceptions.EntityAlreadyExistsException;
 import com.kate.yarnshop.exceptions.EntityNotFoundException;
 import org.springframework.http.HttpStatus;
@@ -29,7 +30,8 @@ public class ErrorHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler({SQLException.class, UnsupportedOperationException.class})
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public void sqlHandler() {
+    public ResponseEntity<ErrorResponse> sqlHandler(Exception ex) {
+        return new ResponseEntity<>(new ErrorResponse(400,ex.getMessage()), HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(UsernameNotFoundException.class)

@@ -31,7 +31,6 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    @Secured({ROLE_ADMIN, ROLE_SELLER})
     public User findUserById(@PathVariable Long id) throws EntityNotFoundException {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException(USER));
@@ -44,6 +43,13 @@ public class UserController {
         if ((ROLE_SELLER.equalsIgnoreCase(authority) && !user.getRole().getName().equals(CUSTOMER_ROLE))
                 || "".equalsIgnoreCase(authority)) {
             throw new EntityNotFoundException(USER);
+        }
+        String userLogin = Optional.ofNullable(SecurityContextHolder.getContext().getAuthentication().getPrincipal())
+                .filter(e -> e instanceof UserDetails)
+                .map(e -> ((UserDetails) e).getUsername())
+                .orElseThrow(UnsupportedOperationException::new);
+        if (!user.getLogin().equals(userLogin)) {
+            throw new UnsupportedOperationException();
         }
         return user;
     }
@@ -79,7 +85,10 @@ public class UserController {
             if (!existingUser.getLogin().equals(userLogin)) {
                 throw new UnsupportedOperationException();
             }
-            existingUser.setPassword(password.getPassword());
+            if (!existingUser.getPassword().equals(password.getOldPassword())) {
+                throw new UnsupportedOperationException("Введен неверный старый пароль");
+            }
+            existingUser.setPassword(password.getNewPassword());
             return userRepository.saveAndFlush(existingUser);
         }).orElseThrow(() -> new EntityNotFoundException(USER));
     }

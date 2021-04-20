@@ -24,13 +24,13 @@ public class OrdersController {
     }
 
     @GetMapping
-    @Secured({ROLE_SELLER, ROLE_ADMIN})
+    @Secured({ROLE_SELLER})
     public List<Order> getAllOrders() {
         return ordersRepository.findAll();
     }
 
     @GetMapping("{id}")
-    @Secured({ROLE_SELLER, ROLE_ADMIN, ROLE_CUSTOMER})
+    @Secured({ROLE_SELLER, ROLE_CUSTOMER})
     public Order findOrderById(@PathVariable Long id) throws EntityNotFoundException {
         Order order = ordersRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("order"));
@@ -42,7 +42,7 @@ public class OrdersController {
     }
 
     @GetMapping("/user/{userId}")
-    @Secured({ROLE_SELLER, ROLE_ADMIN, ROLE_CUSTOMER})
+    @Secured({ROLE_SELLER, ROLE_CUSTOMER})
     public List<Order> findOrdersByUser(@PathVariable Long userId) {
         List<Order> orders = ordersRepository.getOrdersByUserId(userId);
         if (sameCustomerValidation.isWrongUser(orders.stream()
@@ -83,7 +83,7 @@ public class OrdersController {
     }
 
     @DeleteMapping("/{id}")
-    @Secured(ROLE_ADMIN)
+    @Secured(ROLE_SELLER)
     public void deleteOrder(@PathVariable Long id) throws EntityNotFoundException {
         Order order = ordersRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("order"));
