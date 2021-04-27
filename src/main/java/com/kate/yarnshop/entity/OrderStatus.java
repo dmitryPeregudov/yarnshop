@@ -15,7 +15,7 @@ public class OrderStatus {
     public static final OrderStatus PROCESSING = new OrderStatus(1L, STATUS_PROCESSING);
     public static final OrderStatus SENT = new OrderStatus(2L, STATUS_SENT);
     public static final OrderStatus DONE = new OrderStatus(3L, STATUS_DONE);
-    public static final OrderStatus CANCELLED = new OrderStatus(3L, STATUS_CANCELLED);
+    public static final OrderStatus CANCELLED = new OrderStatus(4L, STATUS_CANCELLED);
 
     @Id
     @Column(name = ID)
