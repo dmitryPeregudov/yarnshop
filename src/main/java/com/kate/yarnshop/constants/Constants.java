@@ -11,6 +11,7 @@ public class Constants {
     public static final String ORDERS_TABLE = "ORDERS";
     public static final String PRODUCTS_TABLE = "PRODUCTS";
     public static final String ORDERED_PRODUCT_AND_QUANTITY_TABLE = "ORDERED_PRODUCT_AND_QUANTITY";
+    public static final String FORUM_MESSAGES_TABLE = "FORUM_MESSAGES";
 
     public static final String ID = "ID";
     public static final String LOGIN_ROW = "LOGIN";
@@ -40,6 +41,8 @@ public class Constants {
     public static final String PRODUCT_ID_ROW = "PRODUCT_ID";
     public static final String QUANTITY_ROW = "QUANTITY";
     public static final String ORDER_ID_ROW = "ORDER_ID";
+    public static final String MESSAGE_ROW = "MESSAGE";
+    public static final String DATE_ROW = "DATE";
 
     public static final String CUSTOMER_ROLE = "customer";
     public static final String USER = "user";
@@ -66,6 +69,7 @@ public class Constants {
     public static final String SOCIAL_MEDIA_PATH = "/socialMedia";
     public static final String SELLER_PATH = "/seller";
     public static final String EXTENDED_PATH = "/**";
+    public static final String FORUM_PATH = "/forum";
 
     public static final long JWT_TOKEN_VALIDITY = 60 * 60;
 }

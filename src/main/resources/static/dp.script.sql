@@ -159,3 +159,12 @@ values ('Александр', '+380504732940', ''),
 insert into SOCIAL_MEDIA
 values ('Instagram', 'https://www.instagram.com/yarinka_yarn/'),
        ('FB', 'https://www.facebook.com/yarinka.yarn/');
+
+CREATE TABLE IF NOT EXISTS FORUM_MESSAGES
+(
+    ID INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    USER_ID INT                              ,
+    FOREIGN KEY (USER_ID) references USERS (ID),
+    MESSAGE VARCHAR(2048),
+    DATE DATETIME not null
+)

@@ -37,7 +37,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         CONTACT_PATH,
                         PRODUCTS_PATH + EXTENDED_PATH,
                         PRODUCT_TYPES_PATH,
-                        LOGIN_PATH)
+                        LOGIN_PATH,
+                        FORUM_PATH)
                 .permitAll()
                 .and()
                 .authorizeRequests()
