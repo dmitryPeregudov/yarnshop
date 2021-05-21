@@ -6,7 +6,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static com.kate.yarnshop.constants.Constants.FORUM_PATH;
 
@@ -21,7 +23,9 @@ public class ForumController {
 
     @GetMapping
     public List<ForumMessages> getAllMessages() {
-        return forumRepository.findAll();
+        return forumRepository.findAll().stream()
+                .sorted(Comparator.comparing(ForumMessages::getDate).reversed())
+                .collect(Collectors.toList());
     }
 
     @PostMapping
