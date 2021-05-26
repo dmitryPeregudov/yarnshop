@@ -1,6 +1,7 @@
 package com.kate.yarnshop.controller;
 
 import com.kate.yarnshop.dao.UserRepository;
+import com.kate.yarnshop.entity.Role;
 import com.kate.yarnshop.entity.User;
 import com.kate.yarnshop.entity.UserPassword;
 import com.kate.yarnshop.exceptions.EntityNotFoundException;
@@ -96,6 +97,13 @@ public class UserController {
     @DeleteMapping("/{id}")
     @Secured(ROLE_ADMIN)
     public void deleteUser(@PathVariable Long id) {
-        userRepository.deleteById(id);
+        User user = userRepository.findById(id)
+                .orElseThrow(UnsupportedOperationException::new);
+
+        if (Role.getDefaultRole().equals(user.getRole())) {
+            throw new UnsupportedOperationException();
+        } else {
+            userRepository.deleteById(id);
+        }
     }
 }
