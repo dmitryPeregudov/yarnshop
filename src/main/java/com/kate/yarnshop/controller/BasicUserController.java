@@ -5,6 +5,7 @@ import com.kate.yarnshop.entity.AuthRequest;
 import com.kate.yarnshop.entity.AuthResponse;
 import com.kate.yarnshop.entity.Role;
 import com.kate.yarnshop.entity.User;
+import com.kate.yarnshop.exceptions.EntityAlreadyExistsException;
 import com.kate.yarnshop.exceptions.EntityNotFoundException;
 import com.kate.yarnshop.security.JwtProvider;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,8 +26,13 @@ public class BasicUserController {
 
     @PostMapping
     @RequestMapping("/register")
-    public AuthResponse register(@RequestBody User user) {
+    public AuthResponse register(@RequestBody User user) throws EntityAlreadyExistsException {
         user.setRole(Role.getDefaultRole());
+        User existingUser = userRepository.getUserByLogin(user.getLogin());
+        User existingUser1 = userRepository.getUserByLogin(user.getPassword());
+        if (existingUser != null || existingUser1 != null) {
+            throw new EntityAlreadyExistsException("Пользователь уже существует");
+        }
         User savedUser = userRepository.saveAndFlush(user);
         String token = jwtProvider.generateToken(savedUser.getLogin());
         return new AuthResponse(user.getId(), token, savedUser.getRole().getName(),
